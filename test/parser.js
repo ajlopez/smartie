@@ -34,6 +34,21 @@ exports['parse integer variable command'] = function (test) {
 	test.ok(cmd);
 	test.equal(cmd.type(), Types.Integer);
 	test.equal(cmd.name(), 'a');
+	test.equal(cmd.value(), null);
+	
+	test.equal(parser.parseCommand(), null);
+}
+
+exports['parse integer variable command with initial value'] = function (test) {
+	var parser = parsers.parser('int a = 42;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.equal(cmd.type(), Types.Integer);
+	test.equal(cmd.name(), 'a');
+	test.ok(cmd.value());
+	test.equal(cmd.value().value(), 42);
 	
 	test.equal(parser.parseCommand(), null);
 }
@@ -46,6 +61,21 @@ exports['parse string variable command'] = function (test) {
 	test.ok(cmd);
 	test.equal(cmd.type(), Types.String);
 	test.equal(cmd.name(), 'a');
+	test.equal(cmd.value(), null);
+	
+	test.equal(parser.parseCommand(), null);
+}
+
+exports['parse string variable command with initial value'] = function (test) {
+	var parser = parsers.parser('string a = "foo";');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.equal(cmd.type(), Types.String);
+	test.equal(cmd.name(), 'a');
+	test.ok(cmd.value());
+	test.equal(cmd.value().value(), 'foo');
 	
 	test.equal(parser.parseCommand(), null);
 }
@@ -59,6 +89,21 @@ exports['parse numeric variable command'] = function (test) {
 	test.ok(cmd);
 	test.equal(cmd.type(), Types.Numeric);
 	test.equal(cmd.name(), 'a');
+	test.equal(cmd.value(), null);
+	
+	test.equal(parser.parseCommand(), null);
+}
+
+exports['parse numeric variable command with initial value'] = function (test) {
+	var parser = parsers.parser('num a = 10;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.equal(cmd.type(), Types.Numeric);
+	test.equal(cmd.name(), 'a');
+	test.ok(cmd.value());
+	test.equal(cmd.value().value(), 10);
 	
 	test.equal(parser.parseCommand(), null);
 }
