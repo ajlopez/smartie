@@ -108,3 +108,14 @@ exports['parse numeric variable command with initial value'] = function (test) {
 	test.equal(parser.parseCommand(), null);
 }
 
+exports['parse empty composite command'] = function (test) {
+	var parser = parsers.parser('{}');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.deepEqual(cmd.commands(), []);
+	
+	test.equal(parser.parseCommand(), null);
+}
+
