@@ -38,5 +38,16 @@ exports['parse integer variable command'] = function (test) {
 	test.equal(parser.parseCommand(), null);
 }
 
+exports['parse string variable command'] = function (test) {
+	var parser = parsers.parser('string a;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.equal(cmd.type(), Types.String);
+	test.equal(cmd.name(), 'a');
+	
+	test.equal(parser.parseCommand(), null);
+}
 
 
