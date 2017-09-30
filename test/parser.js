@@ -137,6 +137,31 @@ exports['parse composite command with one command'] = function (test) {
 	test.equal(parser.parseCommand(), null);
 }
 
+exports['parse composite command with two commands'] = function (test) {
+	var parser = parsers.parser('{ int a = 42; string b = "foo"; }');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.equal(cmd.commands().length, 2);
+	
+	var subcmd = cmd.commands()[0];
+	
+	test.ok(subcmd);
+	test.equal(subcmd.name(), 'a');
+	test.ok(subcmd.value());
+	test.equal(subcmd.value().value(), 42);
+	
+	var subcmd = cmd.commands()[1];
+	
+	test.ok(subcmd);
+	test.equal(subcmd.name(), 'b');
+	test.ok(subcmd.value());
+	test.equal(subcmd.value().value(), "foo");
+	
+	test.equal(parser.parseCommand(), null);
+}
+
 exports['parse empty contract command'] = function (test) {
 	var parser = parsers.parser('contract Empty {}');
 	
