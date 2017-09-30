@@ -1,5 +1,6 @@
 
 var parsers = require('../lib/parsers');
+var Types = parsers.Types;
 
 exports['parse integer expression'] = function (test) {
 	var parser = parsers.parser('42');
@@ -25,7 +26,17 @@ exports['parse string expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
-
+exports['parse integer variable command'] = function (test) {
+	var parser = parsers.parser('int a;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.equal(cmd.type(), Types.Integer);
+	test.equal(cmd.name(), 'a');
+	
+	test.equal(parser.parseCommand(), null);
+}
 
 
 
