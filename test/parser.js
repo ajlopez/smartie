@@ -34,7 +34,7 @@ exports['parse integer variable command'] = function (test) {
 	test.ok(cmd);
 	test.equal(cmd.type(), Types.Integer);
 	test.equal(cmd.name(), 'a');
-	test.equal(cmd.value(), null);
+	test.equal(cmd.expression(), null);
 	
 	test.equal(parser.parseCommand(), null);
 }
@@ -47,8 +47,8 @@ exports['parse integer variable command with initial value'] = function (test) {
 	test.ok(cmd);
 	test.equal(cmd.type(), Types.Integer);
 	test.equal(cmd.name(), 'a');
-	test.ok(cmd.value());
-	test.equal(cmd.value().value(), 42);
+	test.ok(cmd.expression());
+	test.equal(cmd.expression().value(), 42);
 	
 	test.equal(parser.parseCommand(), null);
 }
@@ -61,7 +61,7 @@ exports['parse string variable command'] = function (test) {
 	test.ok(cmd);
 	test.equal(cmd.type(), Types.String);
 	test.equal(cmd.name(), 'a');
-	test.equal(cmd.value(), null);
+	test.equal(cmd.expression(), null);
 	
 	test.equal(parser.parseCommand(), null);
 }
@@ -74,8 +74,8 @@ exports['parse string variable command with initial value'] = function (test) {
 	test.ok(cmd);
 	test.equal(cmd.type(), Types.String);
 	test.equal(cmd.name(), 'a');
-	test.ok(cmd.value());
-	test.equal(cmd.value().value(), 'foo');
+	test.ok(cmd.expression());
+	test.equal(cmd.expression().value(), 'foo');
 	
 	test.equal(parser.parseCommand(), null);
 }
@@ -89,7 +89,7 @@ exports['parse numeric variable command'] = function (test) {
 	test.ok(cmd);
 	test.equal(cmd.type(), Types.Numeric);
 	test.equal(cmd.name(), 'a');
-	test.equal(cmd.value(), null);
+	test.equal(cmd.expression(), null);
 	
 	test.equal(parser.parseCommand(), null);
 }
@@ -102,8 +102,22 @@ exports['parse numeric variable command with initial value'] = function (test) {
 	test.ok(cmd);
 	test.equal(cmd.type(), Types.Numeric);
 	test.equal(cmd.name(), 'a');
-	test.ok(cmd.value());
-	test.equal(cmd.value().value(), 10);
+	test.ok(cmd.expression());
+	test.equal(cmd.expression().value(), 10);
+	
+	test.equal(parser.parseCommand(), null);
+}
+
+exports['parse assign command'] = function (test) {
+	var parser = parsers.parser('a = 42;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.ok(cmd.lvalue());
+	test.equal(cmd.lvalue().name());
+	test.ok(cmd.expression());
+	test.equal(cmd.expression().value(), 42);
 	
 	test.equal(parser.parseCommand(), null);
 }
@@ -131,8 +145,8 @@ exports['parse composite command with one command'] = function (test) {
 	
 	test.ok(subcmd);
 	test.equal(subcmd.name(), 'a');
-	test.ok(subcmd.value());
-	test.equal(subcmd.value().value(), 42);
+	test.ok(subcmd.expression());
+	test.equal(subcmd.expression().value(), 42);
 	
 	test.equal(parser.parseCommand(), null);
 }
@@ -149,15 +163,15 @@ exports['parse composite command with two commands'] = function (test) {
 	
 	test.ok(subcmd);
 	test.equal(subcmd.name(), 'a');
-	test.ok(subcmd.value());
-	test.equal(subcmd.value().value(), 42);
+	test.ok(subcmd.expression());
+	test.equal(subcmd.expression().value(), 42);
 	
 	var subcmd = cmd.commands()[1];
 	
 	test.ok(subcmd);
 	test.equal(subcmd.name(), 'b');
-	test.ok(subcmd.value());
-	test.equal(subcmd.value().value(), "foo");
+	test.ok(subcmd.expression());
+	test.equal(subcmd.expression().value(), "foo");
 	
 	test.equal(parser.parseCommand(), null);
 }
@@ -189,15 +203,15 @@ exports['parse contract command with body with two commands'] = function (test) 
 	
 	test.ok(subcmd);
 	test.equal(subcmd.name(), 'a');
-	test.ok(subcmd.value());
-	test.equal(subcmd.value().value(), 42);
+	test.ok(subcmd.expression());
+	test.equal(subcmd.expression().value(), 42);
 	
 	var subcmd = cmd.body().commands()[1];
 	
 	test.ok(subcmd);
 	test.equal(subcmd.name(), 'b');
-	test.ok(subcmd.value());
-	test.equal(subcmd.value().value(), "foo");
+	test.ok(subcmd.expression());
+	test.equal(subcmd.expression().value(), "foo");
 	
 	test.equal(parser.parseCommand(), null);
 }
