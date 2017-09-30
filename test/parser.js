@@ -119,3 +119,16 @@ exports['parse empty composite command'] = function (test) {
 	test.equal(parser.parseCommand(), null);
 }
 
+exports['parse empty contract command'] = function (test) {
+	var parser = parsers.parser('contract Empty {}');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.equal(cmd.name(), 'Empty');
+	test.ok(cmd.body());
+	test.deepEqual(cmd.body().commands(), []);
+	
+	test.equal(parser.parseCommand(), null);
+}
+
