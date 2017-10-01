@@ -1,6 +1,7 @@
 
 var parsers = require('../lib/parsers');
 var Types = parsers.Types;
+var Operators = parsers.Operators;
 
 exports['parse integer expression'] = function (test) {
 	var parser = parsers.parser('42');
@@ -174,6 +175,45 @@ exports['parse composite command with two commands'] = function (test) {
 	test.equal(subcmd.expression().value(), "foo");
 	
 	test.equal(parser.parseCommand(), null);
+}
+
+exports['parse integer method'] = function (test) {
+	var parser = parsers.parser("int add(int x, int y) { return x + y; }");
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	
+	test.equal(cmd.name(), "add");
+	test.equal(cmd.type(), Types.Integer);
+	test.ok(cmd.arguments());
+	test.equal(cmd.arguments().length, 2);
+	
+	var arg = cmd.arguments()[0];
+	
+	test.ok(arg);
+	test.equal(arg.name(), "x");
+	test.equal(arg.type(), Types.Integer);
+		
+	var arg = cmd.arguments()[1];
+	
+	test.ok(arg);
+	test.equal(arg.name(), "y");
+	test.equal(arg.type(), Types.Integer);
+	
+	test.ok(cmd.body());
+	test.ok(cmd.body().commands());
+	test.equal(cmd.body().commands().length, 1);
+	
+	var retcmd = cmd.body().commands()[0];
+	
+	test.ok(retcmd);
+	test.ok(retcmd.expression());
+	test.ok(retcmd.expression().left());
+	test.equal(retcmd.expression().left().name(), "x");
+	test.ok(retcmd.expression().right());
+	test.equal(retcmd.expression().right().name(), "y");
+	test.equal(retcmd.expression().operator(), Operators.Add);
 }
 
 exports['parse empty contract command'] = function (test) {
