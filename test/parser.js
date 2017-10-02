@@ -39,6 +39,22 @@ exports['parse name expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
+exports['parse add expression'] = function (test) {
+	var parser = parsers.parser('1 + 41');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+    test.ok(expr.operator);
+    test.equal(expr.operator(), Operators.Add);
+	test.ok(expr.left);
+    test.equal(expr.left().value(), 1);
+	test.ok(expr.right);
+    test.equal(expr.right().value(), 41);
+	
+	test.equal(parser.parseExpression(), null);
+};
+
 exports['parse integer variable command'] = function (test) {
 	var parser = parsers.parser('int a;');
 	
