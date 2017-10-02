@@ -27,6 +27,18 @@ exports['parse string expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
+exports['parse name expression'] = function (test) {
+	var parser = parsers.parser('a');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.ok(expr.name);
+	test.equal(expr.name(), "a");
+	
+	test.equal(parser.parseExpression(), null);
+};
+
 exports['parse integer variable command'] = function (test) {
 	var parser = parsers.parser('int a;');
 	
