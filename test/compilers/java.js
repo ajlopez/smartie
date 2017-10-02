@@ -22,3 +22,13 @@ exports['compile string'] = function (test) {
 	test.equal(result, '"foo"');
 }
 
+exports['compile name'] = function (test) {
+	var parser = parsers.parser('a');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, 'a');
+}
+
