@@ -71,6 +71,22 @@ exports['parse subtract expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
+exports['parse multiply expression'] = function (test) {
+	var parser = parsers.parser('21 * 2');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+    test.ok(expr.operator);
+    test.equal(expr.operator(), Operators.Multiply);
+	test.ok(expr.left);
+    test.equal(expr.left().value(), 21);
+	test.ok(expr.right);
+    test.equal(expr.right().value(), 2);
+	
+	test.equal(parser.parseExpression(), null);
+};
+
 exports['parse integer variable command'] = function (test) {
 	var parser = parsers.parser('int a;');
 	
