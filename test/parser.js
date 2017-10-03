@@ -87,6 +87,22 @@ exports['parse multiply expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
+exports['parse divide expression'] = function (test) {
+	var parser = parsers.parser('84 / 2');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+    test.ok(expr.operator);
+    test.equal(expr.operator(), Operators.Divide);
+	test.ok(expr.left);
+    test.equal(expr.left().value(), 84);
+	test.ok(expr.right);
+    test.equal(expr.right().value(), 2);
+	
+	test.equal(parser.parseExpression(), null);
+};
+
 exports['parse integer variable command'] = function (test) {
 	var parser = parsers.parser('int a;');
 	
