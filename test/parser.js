@@ -27,6 +27,30 @@ exports['parse string expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
+exports['parse true as boolean expression'] = function (test) {
+	var parser = parsers.parser('true');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.ok(expr.value);
+	test.equal(expr.value(), true);
+	
+	test.equal(parser.parseExpression(), null);
+};
+
+exports['parse false as boolean expression'] = function (test) {
+	var parser = parsers.parser('false');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.ok(expr.value);
+	test.equal(expr.value(), false);
+	
+	test.equal(parser.parseExpression(), null);
+};
+
 exports['parse name expression'] = function (test) {
 	var parser = parsers.parser('a');
 	
