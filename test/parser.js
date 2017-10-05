@@ -127,6 +127,22 @@ exports['parse divide expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
+exports['parse equal expression'] = function (test) {
+	var parser = parsers.parser('42 == 3');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+    test.ok(expr.operator);
+    test.equal(expr.operator(), Operators.Equals);
+	test.ok(expr.left);
+    test.equal(expr.left().value(), 42);
+	test.ok(expr.right);
+    test.equal(expr.right().value(), 3);
+	
+	test.equal(parser.parseExpression(), null);
+};
+
 exports['parse integer variable command'] = function (test) {
 	var parser = parsers.parser('int a;');
 	
