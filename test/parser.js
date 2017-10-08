@@ -228,7 +228,6 @@ exports['parse string variable command with initial value'] = function (test) {
 	test.equal(parser.parseCommand(), null);
 }
 
-
 exports['parse numeric variable command'] = function (test) {
 	var parser = parsers.parser('num a;');
 	
@@ -323,6 +322,29 @@ exports['parse composite command with two commands'] = function (test) {
 	
 	test.equal(parser.parseCommand(), null);
 }
+
+exports['parse return command without expression'] = function (test) {
+	var parser = parsers.parser('return;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.equal(cmd.expression(), null);
+	
+	test.equal(parser.parseCommand(), null);
+};
+
+exports['parse return command with expression'] = function (test) {
+	var parser = parsers.parser('return 42;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.ok(cmd.expression());
+	test.equal(cmd.expression().value(), 42);
+	
+	test.equal(parser.parseCommand(), null);
+};
 
 exports['parse integer method'] = function (test) {
 	var parser = parsers.parser("int add(int x, int y) { return x + y; }");
