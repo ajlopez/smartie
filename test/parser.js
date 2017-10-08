@@ -159,7 +159,7 @@ exports['parse not equal expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
-exports['parse less expression'] = function (test) {
+exports['parse less than expression'] = function (test) {
 	var parser = parsers.parser('42 < 3');
 	
 	var expr = parser.parseExpression();
@@ -174,6 +174,23 @@ exports['parse less expression'] = function (test) {
 	
 	test.equal(parser.parseExpression(), null);
 };
+
+exports['parse greater than expression'] = function (test) {
+	var parser = parsers.parser('42 > 3');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+    test.ok(expr.operator);
+    test.equal(expr.operator(), Operators.Greater);
+	test.ok(expr.left);
+    test.equal(expr.left().value(), 42);
+	test.ok(expr.right);
+    test.equal(expr.right().value(), 3);
+	
+	test.equal(parser.parseExpression(), null);
+};
+
 exports['parse integer variable command'] = function (test) {
 	var parser = parsers.parser('int a;');
 	
