@@ -52,3 +52,13 @@ exports['compile name'] = function (test) {
 	test.equal(result, 'a');
 }
 
+exports['compile return'] = function (test) {
+	var parser = parsers.parser('return;');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'return;');
+}
+
