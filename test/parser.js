@@ -395,6 +395,16 @@ exports['parse return command with expression'] = function (test) {
 	test.equal(parser.parseCommand(), null);
 };
 
+exports['parse break command'] = function (test) {
+	var parser = parsers.parser('break;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	
+	test.equal(parser.parseCommand(), null);
+};
+
 exports['parse integer method'] = function (test) {
 	var parser = parsers.parser("int add(int x, int y) { return x + y; }");
 	
