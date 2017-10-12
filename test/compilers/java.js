@@ -72,3 +72,13 @@ exports['compile return with expression'] = function (test) {
 	test.equal(result, 'return 42;');
 }
 
+exports['compile break command'] = function (test) {
+	var parser = parsers.parser('break;');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'break;');
+}
+
