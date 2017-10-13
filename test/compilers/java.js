@@ -82,3 +82,13 @@ exports['compile break command'] = function (test) {
 	test.equal(result, 'break;');
 }
 
+exports['compile continue command'] = function (test) {
+	var parser = parsers.parser('continue;');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'continue;');
+}
+
