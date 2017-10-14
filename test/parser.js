@@ -304,6 +304,20 @@ exports['parse numeric variable command with initial value'] = function (test) {
 	test.equal(parser.parseCommand(), null);
 }
 
+exports['parse assignment expression'] = function (test) {
+	var parser = parsers.parser('a = 42');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.ok(expr.lvalue());
+	test.equal(expr.lvalue().name(), 'a');
+	test.ok(expr.expression());
+	test.equal(expr.expression().value(), 42);
+	
+	test.equal(parser.parseExpression(), null);
+}
+
 exports['parse assign command'] = function (test) {
 	var parser = parsers.parser('a = 42;');
 	
