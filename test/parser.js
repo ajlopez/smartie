@@ -318,16 +318,17 @@ exports['parse assignment expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 }
 
-exports['parse assign command'] = function (test) {
+exports['parse assignment expression as command'] = function (test) {
 	var parser = parsers.parser('a = 42;');
 	
 	var cmd = parser.parseCommand();
 	
 	test.ok(cmd);
-	test.ok(cmd.lvalue());
-	test.equal(cmd.lvalue().name());
 	test.ok(cmd.expression());
-	test.equal(cmd.expression().value(), 42);
+	test.ok(cmd.expression().lvalue());
+	test.equal(cmd.expression().lvalue().name(), 'a');
+	test.ok(cmd.expression().expression());
+	test.equal(cmd.expression().expression().value(), 42);
 	
 	test.equal(parser.parseCommand(), null);
 }
