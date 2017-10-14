@@ -92,3 +92,13 @@ exports['compile continue command'] = function (test) {
 	test.equal(result, 'continue;');
 }
 
+exports['compile assignment expression'] = function (test) {
+	var parser = parsers.parser('a = 42');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, 'a = 42');
+}
+
