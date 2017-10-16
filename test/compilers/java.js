@@ -12,6 +12,16 @@ exports['compile integer'] = function (test) {
 	test.equal(result, '42');
 }
 
+exports['compile add'] = function (test) {
+	var parser = parsers.parser('41 + 1');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, '41 + 1');
+}
+
 exports['compile string'] = function (test) {
 	var parser = parsers.parser('"foo"');
 	var compiler = compilers.compiler();
@@ -130,6 +140,16 @@ exports['compile composite command with two commands'] = function (test) {
 	
 	test.ok(result);
 	test.equal(result, '{ a = 42; return a; }');
+}
+
+exports['compile while command'] = function (test) {
+	var parser = parsers.parser('while (a < 42) a = 42;');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'while (a < 42) a = 42;');
 }
 
 
