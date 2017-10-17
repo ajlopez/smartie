@@ -102,6 +102,26 @@ exports['compile continue command'] = function (test) {
 	test.equal(result, 'continue;');
 }
 
+exports['compile add expression'] = function (test) {
+	var parser = parsers.parser('1 + 41');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, '1 + 41');
+}
+
+exports['compile subtract expression'] = function (test) {
+	var parser = parsers.parser('43 - 1');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, '43 - 1');
+}
+
 exports['compile assignment expression'] = function (test) {
 	var parser = parsers.parser('a = 42');
 	var compiler = compilers.compiler();
