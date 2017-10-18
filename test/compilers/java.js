@@ -122,6 +122,26 @@ exports['compile subtract expression'] = function (test) {
 	test.equal(result, '43 - 1');
 }
 
+exports['compile multiply expression'] = function (test) {
+	var parser = parsers.parser('21 * 2');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, '21 * 2');
+}
+
+exports['compile divide expression'] = function (test) {
+	var parser = parsers.parser('84 / 2');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, '84 / 2');
+}
+
 exports['compile assignment expression'] = function (test) {
 	var parser = parsers.parser('a = 42');
 	var compiler = compilers.compiler();
