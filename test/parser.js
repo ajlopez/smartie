@@ -509,7 +509,7 @@ exports['parse contract command with body with two commands'] = function (test) 
 	test.equal(parser.parseCommand(), null);
 }
 
-exports['parser while command'] = function (test) {
+exports['parse while command'] = function (test) {
 	var parser = parsers.parser('while (a < 42) a = 42;');
 	
 	var cmd = parser.parseCommand();
@@ -526,6 +526,27 @@ exports['parser while command'] = function (test) {
 	test.equal(cmd.body().expression().lvalue().name(), 'a');
 	test.ok(cmd.body().expression().expression());
 	test.equal(cmd.body().expression().expression().value(), 42);
+	
+	test.equal(parser.parseCommand(), null);
+}
+
+exports['parse if command'] = function (test) {
+	var parser = parsers.parser('if (a < 42) a = 42;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.ok(cmd.condition());
+    test.equal(cmd.condition().operator(), Operators.Less);
+    test.equal(cmd.condition().left().name(), 'a');
+    test.equal(cmd.condition().right().value(), 42);
+	
+	test.ok(cmd.then());
+	test.ok(cmd.then().expression());
+	test.ok(cmd.then().expression().lvalue());
+	test.equal(cmd.then().expression().lvalue().name(), 'a');
+	test.ok(cmd.then().expression().expression());
+	test.equal(cmd.then().expression().expression().value(), 42);
 	
 	test.equal(parser.parseCommand(), null);
 }
