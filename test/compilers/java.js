@@ -212,4 +212,13 @@ exports['compile while command'] = function (test) {
 	test.equal(result, 'while (a < 42) a = 42;');
 }
 
+exports['compile if command'] = function (test) {
+	var parser = parsers.parser('if (a < 42) a = 42;');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'if (a < 42) a = 42;');
+}
 
