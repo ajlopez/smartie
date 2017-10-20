@@ -550,3 +550,31 @@ exports['parse if command'] = function (test) {
 	
 	test.equal(parser.parseCommand(), null);
 }
+
+exports['parse if command with else'] = function (test) {
+	var parser = parsers.parser('if (a < 42) a = 42; else b = 1;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.ok(cmd.condition());
+    test.equal(cmd.condition().operator(), Operators.Less);
+    test.equal(cmd.condition().left().name(), 'a');
+    test.equal(cmd.condition().right().value(), 42);
+	
+	test.ok(cmd.then());
+	test.ok(cmd.then().expression());
+	test.ok(cmd.then().expression().lvalue());
+	test.equal(cmd.then().expression().lvalue().name(), 'a');
+	test.ok(cmd.then().expression().expression());
+	test.equal(cmd.then().expression().expression().value(), 42);
+	
+	test.ok(cmd.else());
+	test.ok(cmd.else().expression());
+	test.ok(cmd.else().expression().lvalue());
+	test.equal(cmd.else().expression().lvalue().name(), 'b');
+	test.ok(cmd.else().expression().expression());
+	test.equal(cmd.else().expression().expression().value(), 1);
+	
+	test.equal(parser.parseCommand(), null);
+}
