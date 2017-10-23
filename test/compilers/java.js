@@ -242,3 +242,13 @@ exports['compile integer variable'] = function (test) {
 	test.equal(result, 'int a;');
 }
 
+exports['compile integer variable with initialization expression'] = function (test) {
+	var parser = parsers.parser('int a = 42;');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'int a = 42;');
+}
+
