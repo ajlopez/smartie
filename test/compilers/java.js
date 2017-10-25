@@ -252,6 +252,16 @@ exports['compile integer variable with initialization expression'] = function (t
 	test.equal(result, 'int a = 42;');
 }
 
+exports['compile string variable with initialization expression'] = function (test) {
+	var parser = parsers.parser('string a = "42";');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'string a = "42";');
+}
+
 exports['compile num variable'] = function (test) {
 	var parser = parsers.parser('num a;');
 	var compiler = compilers.compiler();
