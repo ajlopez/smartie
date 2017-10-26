@@ -272,3 +272,13 @@ exports['compile num variable'] = function (test) {
 	test.equal(result, 'Int256 a;');
 }
 
+exports['compile num variable with initialization expression'] = function (test) {
+	var parser = parsers.parser('num a = 42;');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'Int256 a = new Int256(42);');
+}
+
