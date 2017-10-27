@@ -18,7 +18,7 @@ See tests
 
 ## References
 
-TBD
+- [Designing a new virtual machine and universal language framework](https://iohk.io/blog/designing-a-new-virtual-machine-and-universal-language-framework)
 
 ## Samples
 
