@@ -19,6 +19,7 @@ See tests
 ## References
 
 - [Designing a new virtual machine and universal language framework](https://iohk.io/blog/designing-a-new-virtual-machine-and-universal-language-framework)
+- [Viper, new contract language](https://github.com/ethereum/viper)
 
 ## Samples
 
