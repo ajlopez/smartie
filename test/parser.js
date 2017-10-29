@@ -314,6 +314,7 @@ exports['parse assignment expression'] = function (test) {
 	test.equal(expr.lvalue().name(), 'a');
 	test.ok(expr.expression());
 	test.equal(expr.expression().value(), 42);
+	test.equal(expr.type(), Types.Integer);
 	
 	test.equal(parser.parseExpression(), null);
 }
@@ -394,6 +395,7 @@ exports['parse return command without expression'] = function (test) {
 	
 	test.ok(cmd);
 	test.equal(cmd.expression(), null);
+	test.equal(cmd.type(), Types.Void);
 	
 	test.equal(parser.parseCommand(), null);
 };
@@ -406,6 +408,7 @@ exports['parse return command with expression'] = function (test) {
 	test.ok(cmd);
 	test.ok(cmd.expression());
 	test.equal(cmd.expression().value(), 42);
+	test.equal(cmd.type(), Types.Integer);
 	
 	test.equal(parser.parseCommand(), null);
 };
