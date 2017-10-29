@@ -308,6 +308,19 @@ exports['parse numeric variable command with initial value'] = function (test) {
 	test.equal(parser.parseCommand(), null);
 }
 
+exports['parse address variable command'] = function (test) {
+	var parser = parsers.parser('address a;');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.equal(cmd.type(), Types.Address);
+	test.equal(cmd.name(), 'a');
+	test.equal(cmd.expression(), null);
+	
+	test.equal(parser.parseCommand(), null);
+}
+
 exports['parse assignment expression'] = function (test) {
 	var parser = parsers.parser('a = 42');
 	
