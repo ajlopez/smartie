@@ -11,6 +11,7 @@ exports['parse integer expression'] = function (test) {
 	test.ok(expr);
 	test.ok(expr.value);
 	test.equal(expr.value(), 42);
+	test.equal(expr.type(), Types.Integer);
 	
 	test.equal(parser.parseExpression(), null);
 };
@@ -23,6 +24,7 @@ exports['parse string expression'] = function (test) {
 	test.ok(expr);
 	test.ok(expr.value);
 	test.equal(expr.value(), "foo");
+	test.equal(expr.type(), Types.String);
 	
 	test.equal(parser.parseExpression(), null);
 };
@@ -35,6 +37,7 @@ exports['parse true as boolean expression'] = function (test) {
 	test.ok(expr);
 	test.ok(expr.value);
 	test.equal(expr.value(), true);
+	test.equal(expr.type(), Types.Boolean);
 	
 	test.equal(parser.parseExpression(), null);
 };
@@ -47,6 +50,7 @@ exports['parse false as boolean expression'] = function (test) {
 	test.ok(expr);
 	test.ok(expr.value);
 	test.equal(expr.value(), false);
+	test.equal(expr.type(), Types.Boolean);
 	
 	test.equal(parser.parseExpression(), null);
 };
