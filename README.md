@@ -20,6 +20,8 @@ See tests
 
 - [Designing a new virtual machine and universal language framework](https://iohk.io/blog/designing-a-new-virtual-machine-and-universal-language-framework)
 - [Viper, new contract language](https://github.com/ethereum/viper)
+- [Simplicity Itself for Blockchains](https://blockstream.com/2017/10/30/simplicity.html)
+- [Simplicity: A New Language for Blockchains](https://blockstream.com/simplicity.pdf)
 
 ## Samples
 
