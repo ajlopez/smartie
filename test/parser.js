@@ -81,6 +81,19 @@ exports['parse dot expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
+exports['parse nested dot expression'] = function (test) {
+	var parser = parsers.parser('a.b.c');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.name(), "c");
+	test.equal(expr.expression().name(), "b");
+	test.equal(expr.expression().expression().name(), "a");
+	
+	test.equal(parser.parseExpression(), null);
+};
+
 exports['parse add expression'] = function (test) {
 	var parser = parsers.parser('1 + 41');
 	
