@@ -94,6 +94,32 @@ exports['parse nested dot expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
+exports['parse call expression without arguments'] = function (test) {
+	var parser = parsers.parser('a()');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.expression().name(), "a");
+	test.equal(expr.arguments().length, 0);
+	
+	test.equal(parser.parseExpression(), null);
+};
+
+exports['parse call expression with two arguments'] = function (test) {
+	var parser = parsers.parser('add(41, 1)');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.equal(expr.expression().name(), "add");
+	test.equal(expr.arguments().length, 2);
+	test.equal(expr.arguments()[0].value(), 41);
+	test.equal(expr.arguments()[1].value(), 1);
+	
+	test.equal(parser.parseExpression(), null);
+};
+
 exports['parse add expression'] = function (test) {
 	var parser = parsers.parser('1 + 41');
 	
