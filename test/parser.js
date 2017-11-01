@@ -67,6 +67,20 @@ exports['parse name expression'] = function (test) {
 	test.equal(parser.parseExpression(), null);
 };
 
+exports['parse dot expression'] = function (test) {
+	var parser = parsers.parser('a.b');
+	
+	var expr = parser.parseExpression();
+	
+	test.ok(expr);
+	test.ok(expr.name);
+	test.equal(expr.name(), "b");
+	test.ok(expr.expression);
+	test.equal(expr.expression().name(), "a");
+	
+	test.equal(parser.parseExpression(), null);
+};
+
 exports['parse add expression'] = function (test) {
 	var parser = parsers.parser('1 + 41');
 	
