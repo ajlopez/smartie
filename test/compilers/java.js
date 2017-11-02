@@ -62,6 +62,16 @@ exports['compile name'] = function (test) {
 	test.equal(result, 'a');
 }
 
+exports['compile dot'] = function (test) {
+	var parser = parsers.parser('a.b');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, 'a.b');
+}
+
 exports['compile return'] = function (test) {
 	var parser = parsers.parser('return;');
 	var compiler = compilers.compiler();
