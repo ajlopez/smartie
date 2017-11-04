@@ -555,6 +555,20 @@ exports['parse empty contract command'] = function (test) {
 	test.equal(parser.parseCommand(), null);
 }
 
+exports['parse empty contract command with is'] = function (test) {
+	var parser = parsers.parser('contract Empty is Mortal {}');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+	test.equal(cmd.name(), 'Empty');
+	test.ok(cmd.body());
+	test.deepEqual(cmd.body().commands(), []);
+	test.deepEqual(cmd.is(), "Mortal");
+	
+	test.equal(parser.parseCommand(), null);
+}
+
 exports['parse contract command with body with two commands'] = function (test) {
 	var parser = parsers.parser('contract Empty { int a = 42; string b = "foo"; }');
 	
