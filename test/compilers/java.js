@@ -312,3 +312,13 @@ exports['compile address variable with initialization expression'] = function (t
 	test.equal(result, 'Address a = new Address(42);');
 }
 
+exports['compile empty contract'] = function (test) {
+	var parser = parsers.parser('contract Empty { }');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'class EmptyContract {}');
+}
+
