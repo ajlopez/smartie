@@ -322,3 +322,12 @@ exports['compile empty contract'] = function (test) {
 	test.equal(result, 'class EmptyContract {}');
 }
 
+exports['compile empty contract with inheritance'] = function (test) {
+	var parser = parsers.parser('contract Empty is Mortal { }');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'class EmptyContract extends MortalContract {}');
+}
