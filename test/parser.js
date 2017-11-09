@@ -667,12 +667,13 @@ exports['parse if command with else'] = function (test) {
 }
 
 exports['parse empty void function'] = function (test) {
-	var parser = parsers.parser('function foo() {}');
+	var parser = parsers.parser('function void foo() {}');
 	
 	var cmd = parser.parseCommand();
 	
 	test.ok(cmd);
     test.equal(cmd. name(), 'foo');
+	test.equal(cmd.type(), Types.Void);
 
 	var body = cmd.body();
 	
