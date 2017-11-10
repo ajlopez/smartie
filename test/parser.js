@@ -2,6 +2,7 @@
 var parsers = require('../lib/parsers');
 var Types = parsers.Types;
 var Operators = parsers.Operators;
+var Visibilities = parsers.Visibilities;
 
 exports['parse integer expression'] = function (test) {
 	var parser = parsers.parser('42');
@@ -674,6 +675,24 @@ exports['parse empty void function'] = function (test) {
 	test.ok(cmd);
     test.equal(cmd. name(), 'foo');
 	test.equal(cmd.type(), Types.Void);
+
+	var body = cmd.body();
+	
+	test.ok(body);
+	test.deepEqual(body.commands(), []);
+	
+	test.equal(parser.parseCommand(), null);
+}
+
+exports['parse empty void function'] = function (test) {
+	var parser = parsers.parser('function void foo() {}');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+    test.equal(cmd. name(), 'foo');
+	test.equal(cmd.type(), Types.Void);
+	test.equal(cmd.visibility(), Visibilities.Private);
 
 	var body = cmd.body();
 	
