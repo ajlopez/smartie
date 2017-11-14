@@ -719,3 +719,21 @@ exports['parse public empty void function'] = function (test) {
 	
 	test.equal(parser.parseCommand(), null);
 }
+
+exports['parse explicit private empty void function'] = function (test) {
+	var parser = parsers.parser('function private void foo() {}');
+	
+	var cmd = parser.parseCommand();
+	
+	test.ok(cmd);
+    test.equal(cmd. name(), 'foo');
+	test.equal(cmd.type(), Types.Void);
+	test.equal(cmd.visibility(), Visibilities.Private);
+
+	var body = cmd.body();
+	
+	test.ok(body);
+	test.deepEqual(body.commands(), []);
+	
+	test.equal(parser.parseCommand(), null);
+}
