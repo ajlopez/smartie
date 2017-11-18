@@ -504,8 +504,8 @@ exports['parse continue command'] = function (test) {
 	test.equal(parser.parseCommand(), null);
 };
 
-exports['parse integer method'] = function (test) {
-	var parser = parsers.parser("int add(int x, int y) { return x + y; }");
+exports['parse integer function'] = function (test) {
+	var parser = parsers.parser("function int add(int x, int y) { return x + y; }");
 	
 	var cmd = parser.parseCommand();
 	
