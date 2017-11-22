@@ -513,16 +513,16 @@ exports['parse integer function'] = function (test) {
 	
 	test.equal(cmd.name(), "add");
 	test.equal(cmd.type(), Types.Integer);
-	test.ok(cmd.arguments());
-	test.equal(cmd.arguments().length, 2);
+	test.ok(cmd.parameters());
+	test.equal(cmd.parameters().length, 2);
 	
-	var arg = cmd.arguments()[0];
+	var arg = cmd.parameters()[0];
 	
 	test.ok(arg);
 	test.equal(arg.name(), "x");
 	test.equal(arg.type(), Types.Integer);
 		
-	var arg = cmd.arguments()[1];
+	var arg = cmd.parameters()[1];
 	
 	test.ok(arg);
 	test.equal(arg.name(), "y");
