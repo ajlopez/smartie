@@ -332,7 +332,7 @@ exports['compile empty contract with inheritance'] = function (test) {
 	test.equal(result, 'class EmptyContract extends MortalContract {}');
 }
 
-exports['compile simple function'] = function (test) {
+exports['compile simple int function'] = function (test) {
 	var parser = parsers.parser('function int add(int a, int b) { return a+b; }');
 	var compiler = compilers.compiler();
 	
@@ -340,5 +340,15 @@ exports['compile simple function'] = function (test) {
 	
 	test.ok(result);
 	test.equal(result, 'private int add(int a, int b) { return a + b; }');
+}
+
+exports['compile simple public int function'] = function (test) {
+	var parser = parsers.parser('function public int add(int a, int b) { return a+b; }');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'public int add(int a, int b) { return a + b; }');
 }
 
