@@ -70,7 +70,7 @@ exports['get name token tabs and new lines'] = function (test) {
 }
 
 exports['get name token skipping line comments'] = function (test) {
-	var lexer = lexers.lexer('\\\\ line comment\nfoo \\\\ another line comment');
+	var lexer = lexers.lexer('// line comment\nfoo // another line comment');
 	
 	var token = lexer.nextToken();
 	

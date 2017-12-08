@@ -10,9 +10,9 @@ Example:
 
 ```
 node compile empty.smt
+node compile simple.smt
 ```
 
-Currently, no code is produced, only the parsing step is executed.
-
+The output is a simple Java source code. WIP.
 
 
