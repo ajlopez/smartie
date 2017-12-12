@@ -141,3 +141,23 @@ exports['compile divide expression'] = function (test) {
 	test.ok(result);
 	test.equal(result, '84 / 2');
 }
+
+exports['compile less than expression'] = function (test) {
+	var parser = parsers.parser('1 < 2');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, '1 < 2');
+}
+
+exports['compile greater than expression'] = function (test) {
+	var parser = parsers.parser('1 > 2');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, '1 > 2');
+}
