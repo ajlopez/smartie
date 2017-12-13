@@ -161,3 +161,14 @@ exports['compile greater than expression'] = function (test) {
 	test.ok(result);
 	test.equal(result, '1 > 2');
 }
+
+exports['compile assignment expression'] = function (test) {
+	var parser = parsers.parser('a = 42');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseExpression());
+	
+	test.ok(result);
+	test.equal(result, 'a = 42');
+}
+
