@@ -172,3 +172,13 @@ exports['compile assignment expression'] = function (test) {
 	test.equal(result, 'a = 42');
 }
 
+exports['compile empty composite command'] = function (test) {
+	var parser = parsers.parser('{}');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, '{}');
+}
+
