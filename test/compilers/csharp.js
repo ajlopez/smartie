@@ -182,3 +182,22 @@ exports['compile empty composite command'] = function (test) {
 	test.equal(result, '{}');
 }
 
+exports['compile composite command with one command'] = function (test) {
+	var parser = parsers.parser('{ return; }');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, '{ return; }');
+}
+
+exports['compile composite command with two commands'] = function (test) {
+	var parser = parsers.parser('{ a = 42; return a; }');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, '{ a = 42; return a; }');
+}
