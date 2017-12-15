@@ -201,3 +201,14 @@ exports['compile composite command with two commands'] = function (test) {
 	test.ok(result);
 	test.equal(result, '{ a = 42; return a; }');
 }
+
+exports['compile while command'] = function (test) {
+	var parser = parsers.parser('while (a < 42) a = 42;');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'while (a < 42) a = 42;');
+}
+
