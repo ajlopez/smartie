@@ -232,3 +232,23 @@ exports['compile if command with else'] = function (test) {
 	test.equal(result, 'if (a < 42) a = a + 1; else done = true;');
 }
 
+exports['compile integer variable'] = function (test) {
+	var parser = parsers.parser('int a;');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'int a;');
+}
+
+exports['compile integer variable with initialization expression'] = function (test) {
+	var parser = parsers.parser('int a = 42;');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'int a = 42;');
+}
+
