@@ -279,7 +279,7 @@ exports['compile string variable with initialization expression'] = function (te
 	var result = compiler.compile(parser.parseCommand());
 	
 	test.ok(result);
-	test.equal(result, 'string a = "42";');
+	test.equal(result, 'String a = "42";');
 }
 
 exports['compile num variable'] = function (test) {
