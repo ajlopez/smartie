@@ -312,4 +312,26 @@ exports['compile empty contract with inheritance'] = function (test) {
 	test.equal(result, 'class EmptyContract : MortalContract {}');
 }
 
+exports['compile simple int function'] = function (test) {
+	var parser = parsers.parser('function int add(int a, int b) { return a+b; }');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'private int add(int a, int b) { return a + b; }');
+}
+
+exports['compile simple int function with explicit private visibility'] = function (test) {
+	var parser = parsers.parser('function private int add(int a, int b) { return a+b; }');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'private int add(int a, int b) { return a + b; }');
+}
+
+
+
 
