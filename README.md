@@ -22,6 +22,7 @@ See tests
 - [Viper, new contract language](https://github.com/ethereum/viper)
 - [Simplicity Itself for Blockchains](https://blockstream.com/2017/10/30/simplicity.html)
 - [Simplicity: A New Language for Blockchains](https://blockstream.com/simplicity.pdf)
+- [Smart Contract Languages Development to Follow](https://blog.comae.io/smart-contract-languages-development-to-follow-992e30774b39)
 
 ## Samples
 
