@@ -332,6 +332,13 @@ exports['compile simple int function with explicit private visibility'] = functi
 	test.equal(result, 'private int add(int a, int b) { return a + b; }');
 }
 
-
-
+exports['compile simple public int function'] = function (test) {
+	var parser = parsers.parser('function public int add(int a, int b) { return a+b; }');
+	var compiler = compilers.compiler();
+	
+	var result = compiler.compile(parser.parseCommand());
+	
+	test.ok(result);
+	test.equal(result, 'public int add(int a, int b) { return a + b; }');
+}
 
